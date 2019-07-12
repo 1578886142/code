@@ -1,0 +1,59 @@
+{template '_header'}
+<style>
+    .select2{
+        margin:0;
+        width:100%;
+        height:34px;
+        border-radius: 3px;
+        border-color: rgb(229, 230, 231);
+    }
+    .select2 .select2-choice{
+        height: 34px;
+        line-height: 32px;
+        border-radius: 3px;
+        border-color: rgb(229, 230, 231);
+    }
+    .select2 .select2-choice .select2-arrow{
+        background: #fff;
+    }
+    .form-group .radio-inline{
+        padding-top: 0px;;
+    }
+</style>
+<div style="margin-top: 50px"></div>
+<form action="" method="post" class="form-horizontal form-search form-validate" id="myform">
+    <h3>砍价活动设置</h3>
+    <hr>
+
+    <div class="form-group">
+        <label class="col-sm-2 control-label">砍价消息通知</label>
+        <div class="col-sm-9 col-xs-12">
+            <select class="select2" name="message">
+                <option value=''>不使用消息通知</option>
+                {loop $template_list $template_val}
+                <option value="{$template_val['id']}" {if $res['message'] == $template_val['id']}selected{/if}>{$template_val['title']}</option>
+                {/loop}
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-sm-2 control-label">砍到底价通知</label>
+        <div class="col-sm-9 col-xs-12">
+            <select class="select2" name="end_message">
+                <option value=''>不使用消息通知</option>
+                {loop $template_list $template_val}
+                <option value="{$template_val['id']}" {if $res['end_message'] == $template_val['id']}selected{/if}>{$template_val['title']}</option>
+                {/loop}
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-sm-9 col-xs-12" style="margin-left: 150px">
+            <input type="submit" value="保存" class="btn btn-primary">
+            <input type="hidden" name="token" value="{$_W['token']}"/>
+        </div>
+    </div>
+</form>
+{template '_footer'}

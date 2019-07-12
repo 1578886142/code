@@ -1,0 +1,60 @@
+{if !empty($diyitem['data'])}
+    <div class="fui-goods-group {$diyitem['style']['liststyle']}">
+        {loop $diyitem['data'] $goodsitem}
+            <a class="fui-goods-item" data-goodsid="{$goodsitem['gid']}" href="{php echo mobileUrl('goods/detail', array('id'=>$goodsitem['gid']))}" data-nocache="true" style="position: relative;">
+                <div class="image" data-lazy-background="{php echo tomedia($goodsitem['thumb'])}">
+                    {if $diyitem['params']['showicon']==1 || $diyitem['params']['showicon']==2}
+                        <div class="goodsicon {$diyitem['params']['iconposition']}"
+                             {if $diyitem['params']['iconposition']=='left top'}
+                                style="top: {$diyitem['style']['iconpaddingtop']}px; left: {$diyitem['style']['iconpaddingleft']}px; text-align: left;"
+                             {elseif $diyitem['params']['iconposition']=='right top'}
+                                style="top: {$diyitem['style']['iconpaddingtop']}px; right: {$diyitem['style']['iconpaddingleft']}px; text-align: right;"
+                             {elseif $diyitem['params']['iconposition']=='left bottom'}
+                                style="bottom: {$diyitem['style']['iconpaddingtop']}px; left: {$diyitem['style']['iconpaddingleft']}px; text-align: left;"
+                             {elseif $diyitem['params']['iconposition']=='left bottom'}
+                                style="bottom: {$diyitem['style']['iconpaddingtop']}px; right: {$diyitem['style']['iconpaddingleft']}px; text-align: right;"
+                             {/if}
+                        >
+                            {if $diyitem['params']['showicon']==1}
+                                <img src="../addons/ewei_shopv2/plugin/diypage/static/images/default/goodsicon-{$diyitem['style']['goodsicon']}.png" style="width: {$diyitem['style']['iconzoom']}%;" />
+                            {elseif $diyitem['params']['showicon']==2 && !empty($diyitem['params']['goodsiconsrc'])}
+                                <img src="{php echo tomedia($diyitem['params']['goodsiconsrc'])}" onerror="this.src=''" style="width: {$diyitem['style']['iconzoom']}%;" />
+                            {/if}
+                        </div>
+                    {/if}
+                </div>
+                {if $diyitem['params']['showtitle']==1 || $diyitem['params']['showprice']==1}
+                    <div class="detail">
+                        {if $diyitem['params']['showtitle']==1}
+                            <div class="name" style="color: {$diyitem['style']['titlecolor']};">
+                                {if $goodsitem['bargain']>0}
+                                    <label style="background-color: {$diyitem['style']['buybtncolor']}; padding: 0px 2px; color: #fff; font-size: 0.6rem">砍价</label>
+                                {/if}
+                                {$goodsitem['title']}
+                            </div>
+                        {/if}
+                        {if $diyitem['params']['showprice']==1}
+                            <div class="price">
+                                <span class="text" style="color: {$diyitem['style']['pricecolor']};">￥{$goodsitem['price']}</span>
+                                {if !empty($diyitem['style']['buystyle']) && empty($goodsitem['bargain'])}
+                                    {if $diyitem['style']['buystyle']=='buybtn-1'}
+                                        <span class="buy" style="background-color: {$diyitem['style']['buybtncolor']};"><i class="icon icon-cart"></i></span>
+                                    {elseif $diyitem['style']['buystyle']=='buybtn-2'}
+                                        <span class="buy" style="background-color: {$diyitem['style']['buybtncolor']};"><i class="icon icon-add"></i></span>
+                                    {elseif $diyitem['style']['buystyle']=='buybtn-3'}
+                                        <span class="buy buybtn-3" style="background-color: {$diyitem['style']['buybtncolor']};">购买</span>
+                                    {/if}
+                                {elseif !empty($goodsitem['bargain'])}
+                                    <span class="buy" style="background-color: {$diyitem['style']['buybtncolor']};">砍</span>
+                                {/if}
+                            </div>
+                        {/if}
+                    </div>
+                {/if}
+                {if $goodsitem['total']<=0}
+                    <div class="salez" style="background-image: url('{php echo tomedia($_W['shopset']['shop']['saleout'])}'); "></div>
+                {/if}
+            </a>
+        {/loop}
+    </div>
+{/if}

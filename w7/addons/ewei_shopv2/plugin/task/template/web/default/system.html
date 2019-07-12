@@ -1,0 +1,26 @@
+<div class="form-group">
+    <label class="col-sm-2 control-label">任务说明</label>
+    <div class="col-sm-9 col-xs-10">
+        {ifp 'task.default.edit|task.default.add'}
+        <textarea class="form-control " rows="5" name="taskinfo" >{if !empty($res['taskinfo'])}{$res['taskinfo']}{else}暂无说明{/if}</textarea>
+        {else}
+        <div class='form-control-static'>{if !empty($res['taskinfo'])}{$res['taskinfo']}{else}暂无说明{/if}</div>
+        {/if}
+    </div>
+</div>
+<div class="form-group">
+    <label class="col-sm-2 control-label">是否添加底部菜单</label>
+    <div class="col-sm-9 col-xs-10">
+        {ifp 'task.default.edit|task.default.add'}
+        <label class="radio-inline">
+            <input type="radio" name="menu_state" value="0" {if $res['menu_state']==0}checked{/if} /> 禁用
+        </label>
+
+        <label class="radio-inline">
+            <input type="radio" name="menu_state" value="1" {if $res['menu_state']==1}checked{/if} /> 启用
+        </label>
+        {else}
+        <div class='form-control-static'>{if $res['menu_state']==0}禁用{else}启用{/if}</div>
+        {/if}
+    </div>
+</div>
